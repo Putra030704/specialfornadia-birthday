@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday 🎂</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <img src="https://media.tenor.com/tXPyzMjAF6MAAAAd/capoo-bugcat.gif" alt="Capoo" class="loading-gif">
+            <div class="loading-title">Happy Birthday Sayangku Cintaku 🎂💙</div>
+            <div class="loading-spinner">
+                <span class="spinner-dot"></span>
+                <span class="spinner-dot"></span>
+                <span class="spinner-dot"></span>
+            </div>
+            <p class="loading-text">Preparing your surprise...</p>
+        </div>
+    </div>
+    
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+        <p class="lightbox-caption" id="lightbox-caption"></p>
+        <div class="lightbox-nav">
+            <span class="lightbox-prev" onclick="prevLightbox()">❮</span>
+            <span class="lightbox-next" onclick="nextLightbox()">❯</span>
+        </div>
+    </div>
+    
+    <!-- Floating Background Elements -->
+    <div class="floating-bg" id="floating-bg"></div>
+    
+    <!-- Music Player (Always Visible) -->
+    <div class="music-player" id="music-player">
+        <div class="player-toggle" onclick="togglePlayer()">
+            <span class="player-icon">🎵</span>
+        </div>
+        <div class="player-panel" id="player-panel">
+            <div class="player-header">
+                <span class="now-playing">Now Playing</span>
+                <span class="close-player" onclick="togglePlayer()">✕</span>
+            </div>
+            <div class="player-song-info">
+                <span class="song-title" id="song-title">Love Story</span>
+                <span class="song-artist" id="song-artist">Taylor Swift</span>
+            </div>
+            <div class="player-progress">
+                <div class="progress-bar" id="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="time-display">
+                    <span id="current-time">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+            <div class="player-controls">
+                <button class="control-btn" onclick="prevSong()">⏮</button>
+                <button class="control-btn play-btn" id="play-btn" onclick="togglePlay()">▶</button>
+                <button class="control-btn" onclick="nextSong()">⏭</button>
+            </div>
+            <div class="playlist">
+                <div class="playlist-item active" data-index="0" onclick="playSong(0)">
+                    <span class="p-num">1</span>
+                    <span class="p-title">Perfect</span>
+                    <span class="p-artist">Ed Sheeran</span>
+                </div>
+                <div class="playlist-item" data-index="1" onclick="playSong(1)">
+                    <span class="p-num">2</span>
+                    <span class="p-title">About You</span>
+                    <span class="p-artist">The 1975</span>
+                </div>
+                <div class="playlist-item" data-index="2" onclick="playSong(2)">
+                    <span class="p-num">3</span>
+                    <span class="p-title">Love Story</span>
+                    <span class="p-artist">Taylor Swift</span>
+                </div>
+                <div class="playlist-item" data-index="3" onclick="playSong(3)">
+                    <span class="p-num">4</span>
+                    <span class="p-title">My Love Mine All Mine</span>
+                    <span class="p-artist">Mitski</span>
+                </div>
+                <div class="playlist-item" data-index="4" onclick="playSong(4)">
+                    <span class="p-num">5</span>
+                    <span class="p-title">Mine</span>
+                    <span class="p-artist">Taylor Swift</span>
+                </div>
+            </div>
+            <div class="volume-control">
+                <span class="vol-icon">🔊</span>
+                <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="80" onchange="setVolume(this.value)">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Audio Elements -->
+    <audio id="audio-bgm" loop preload="auto"></audio>
+    
+    <div id="app">
+<!-- Screen 0: Gate (Password) -->
+        <section class="screen" id="screen-0" data-screen="0">
+            <div class="screen-content">
+                <img src="https://media.tenor.com/iJCvfF7m650AAAAj/bugcat-capoo.gif" alt="Capoo" class="capoo-gif" onclick="easterEgg()">
+                <h1 class="heading">Hi my kekasih, hayo tebak passwordnya, I bet u knowww!!</h1>
+                <p class="subtext">clue: tebak sendiri wlee :p</p>
+                
+                <div class="pin-input-container">
+                    <div class="pin-dots">
+                        <span class="pin-dot"></span>
+                        <span class="pin-dot"></span>
+                        <span class="pin-dot"></span>
+                        <span class="pin-dot"></span>
+                        <span class="pin-dot"></span>
+                        <span class="pin-dot"></span>
+                    </div>
+                </div>
+                
+                <div class="numpad-container">
+                    <div class="numpad">
+                        <button class="num-btn" data-num="1">1</button>
+                        <button class="num-btn" data-num="2">2</button>
+                        <button class="num-btn" data-num="3">3</button>
+                        <button class="num-btn" data-num="4">4</button>
+                        <button class="num-btn" data-num="5">5</button>
+                        <button class="num-btn" data-num="6">6</button>
+                        <button class="num-btn" data-num="7">7</button>
+                        <button class="num-btn" data-num="8">8</button>
+                        <button class="num-btn" data-num="9">9</button>
+                        <button class="num-btn backspace" data-action="backspace">⌫</button>
+                        <button class="num-btn" data-num="0">0</button>
+                        <button class="num-btn clear" data-action="clear">C</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- Screen 1: Hi Pretty -->
+        <section class="screen hidden" id="screen-1" data-screen="1">
+            <div class="screen-content">
+                <img src="https://media.tenor.com/j99yXV_iTRsAAAAd/bugcat-capoo.gif" alt="Capoo" class="capoo-gif">
+                <h1 class="heading">hi, selamat cantik kamu berhasil yeyy!!!🫶🏻👋🏻</h1>
+                <div class="btn-container">
+                    <button class="action-btn" onclick="goToScreen(2)">i have something special for u<span class="heart">♥</span></button>
+                    <button class="back-btn single-back" onclick="goToScreen(0)">← back</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 2: Ready -->
+        <section class="screen hidden" id="screen-2" data-screen="2">
+            <div class="screen-content">
+                <img src="https://media.tenor.com/8V5_7dB1jsYAAAAM/capoo-waiting.gif" alt="Capoo" class="capoo-gif">
+                <h1 class="heading">are you readyy to open thisss?</h1>
+                <div class="button-group">
+                    <button class="action-btn yes-btn" onclick="goToScreen(4)">yess</button>
+                    <button class="action-btn no-btn" onclick="goToScreen(3)">noo</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 3: Mad (Prank) -->
+        <section class="screen hidden mad-theme" id="screen-3" data-screen="3">
+            <div class="screen-content">
+                <img src="https://media.tenor.com/eagtMXhEAaEAAAAM/bugcat-capoo.gif" alt="Marah" class="capoo-gif">
+                <h1 class="heading mad-heading">OH GITU SEKARANG KAMU SAMA AKU? 😡</h1>
+                <button class="action-btn no-btn" onclick="goToScreen(2)">back</button>
+            </div>
+        </section>
+
+        <!-- Screen 4: Birthday Wish -->
+        <section class="screen hidden" id="screen-4" data-screen="4">
+            <div class="screen-content">
+                <img src="https://media.tenor.com/tXPyzMjAF6MAAAAd/capoo-bugcat.gif" alt="Capoo" class="capoo-gif">
+                <h1 class="heading">Today, this pretty girl turns 21! happy birthday, my love 🤍</h1>
+                <button class="action-btn" onclick="goToScreen(5)">open it <span class="heart">♥</span></button>
+            </div>
+        </section>
+
+        <!-- Screen 5: Transition -->
+        <section class="screen hidden" id="screen-5" data-screen="5">
+            <div class="screen-content">
+                <img src="https://media.tenor.com/2mOj2mF1JRsAAAAM/capoo-bugcat.gif" alt="Capoo" class="capoo-gif">
+                <h1 class="heading">okay last one, i made something for your birthday, read it slowly okayyy?</h1>
+                <button class="action-btn" onclick="goToScreen(6)"><span class="heart">♥</span></button>
+            </div>
+        </section>
+
+        <!-- Screen 6: Memory Lane 1 -->
+        <section class="screen hidden" id="screen-6" data-screen="6">
+            <div class="screen-content">
+                <div class="polaroid-wrapper">
+                    <div class="polaroid" onclick="openLightbox(0)">
+                        <img src="img/src1.jpg" alt="Memory 1" class="polaroid-img">
+                        <p class="polaroid-caption">I am always happy in every moment we spend together, and I hope it lasts forever.</p>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(5)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(7)">next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 7: Memory Lane 2 -->
+        <section class="screen hidden" id="screen-7" data-screen="7">
+            <div class="screen-content">
+                <div class="polaroid-wrapper">
+                    <div class="polaroid" onclick="openLightbox(1)">
+                        <img src="img/src2.jpg" alt="Memory 2" class="polaroid-img">
+                        <p class="polaroid-caption">I'm so grateful for every moment we've shared since then</p>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(6)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(8)">next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 8: Memory Lane 3 -->
+        <section class="screen hidden" id="screen-8" data-screen="8">
+            <div class="screen-content">
+                <div class="polaroid-wrapper">
+                    <div class="polaroid" onclick="openLightbox(2)">
+                        <img src="img/src3.jpg" alt="Memory 3" class="polaroid-img">
+                        <p class="polaroid-caption">Thank you for being part of my days and making them special</p>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(7)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(9)">next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 9: Memory Lane 4 -->
+        <section class="screen hidden" id="screen-9" data-screen="9">
+            <div class="screen-content">
+                <div class="polaroid-wrapper">
+                    <div class="polaroid" onclick="openLightbox(3)">
+                        <img src="img/src4.jpg" alt="Memory 4" class="polaroid-img">
+                        <p class="polaroid-caption">I hope we keep creating memories, big and small, together</p>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(8)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(10)">next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 10: Memory Lane 5 -->
+        <section class="screen hidden" id="screen-10" data-screen="10">
+            <div class="screen-content">
+                <div class="polaroid-wrapper">
+                    <div class="polaroid" onclick="openLightbox(4)">
+                        <img src="img/src5.jpg" alt="Memory 5" class="polaroid-img">
+                        <p class="polaroid-caption">you deserve the world and i'll always love you more than ever...</p>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(9)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(11)">next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 11: Galaxy Link -->
+        <section class="screen hidden" id="screen-11" data-screen="11">
+            <div class="screen-content">
+                <div class="sticker-collection">
+                    <span class="sticker">💕</span>
+                    <span class="sticker">🤍</span>
+                    <span class="sticker">💖</span>
+                    <span class="sticker">🤍</span>
+                    <span class="sticker">🌸</span>
+                </div>
+                <h2 class="heading" style="font-size: 1.3rem; margin-bottom: 15px;">
+                    Kamu mau lihat foto mesra<br> kita berdua lebih banyak lagi?
+                </h2>
+                <a href="https://putra030704.github.io/galaxylove/" target="_blank" class="action-btn" style="display: inline-block; text-decoration: none;">
+                    Buka Gallery 📸
+                </a>
+                <div class="btn-group" style="margin-top: 20px;">
+                    <button class="back-btn" onclick="goToScreen(10)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(12)">next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 12: Our Song -->
+        <section class="screen hidden" id="screen-12" data-screen="12">
+            <div class="screen-content">
+                <div class="music-notes">
+                    <span class="note">♪</span>
+                    <span class="note">♫</span>
+                    <span class="note">♪</span>
+                    <span class="note">♫</span>
+                    <span class="note">♪</span>
+                </div>
+                <h1 class="heading">our song <span class="music-icon"></span></h1>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(11)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(13)">next →</button>
+                </div>
+            </div>
+        </section>
+
+<!-- Screen 13: Spotify Card - Modern -->
+        <section class="screen hidden" id="screen-13" data-screen="13">
+            <div class="screen-content">
+                <div class="spotify-player-modern">
+                    <!-- Header: Cover + Info -->
+                    <div class="spotify-header-modern">
+                        <!-- Album Cover -->
+                        <div class="spotify-cover-modern" id="spotify-cover">
+                            <span class="cover-note-modern">🎵</span>
+                        </div>
+                        
+                        <!-- Track Info -->
+                        <div class="spotify-info-modern">
+                            <h2 class="spotify-title-modern" id="spotify-song-title">for u 💙</h2>
+                            <p class="spotify-artist-modern" id="spotify-song-artist">Lovee</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="spotify-progress-modern">
+                        <div class="progress-bar-modern" id="spotify-progress-bar">
+                            <div class="progress-fill-modern" id="spotify-progress-fill"></div>
+                        </div>
+                        <div class="time-display-modern">
+                            <span id="spotify-current-time">0:00</span>
+                            <span id="spotify-duration">0:00</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div class="spotify-controls-modern">
+                        <button class="control-btn-modern" onclick="prevSong()">⏮</button>
+                        <button class="control-btn-modern main-play-mod" id="main-play-btn" onclick="togglePlay()">▶</button>
+                        <button class="control-btn-modern" onclick="nextSong()">⏭</button>
+                    </div>
+                    
+                    <!-- Playlist -->
+                    <ul class="spotify-list-modern">
+                        <li class="spotify-item-modern" id="spotify-track-0" onclick="playSong(0)">
+                            <span class="track-num-modern">
+                                <div class="playing-indicator" id="playing-ind-0" style="display: none;">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="num-text">1</span>
+                            </span>
+                            <div class="track-info-modern">
+                                <span class="track-name-modern">Perfect</span>
+                                <span class="track-artist-modern">Ed Sheeran</span>
+                            </div>
+                        </li>
+                        <li class="spotify-item-modern" id="spotify-track-1" onclick="playSong(1)">
+                            <span class="track-num-modern">
+                                <div class="playing-indicator" id="playing-ind-1" style="display: none;">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="num-text">2</span>
+                            </span>
+                            <div class="track-info-modern">
+                                <span class="track-name-modern">About You</span>
+                                <span class="track-artist-modern">The 1975</span>
+                            </div>
+                        </li>
+                        <li class="spotify-item-modern" id="spotify-track-2" onclick="playSong(2)">
+                            <span class="track-num-modern">
+                                <div class="playing-indicator" id="playing-ind-2" style="display: none;">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="num-text">3</span>
+                            </span>
+                            <div class="track-info-modern">
+                                <span class="track-name-modern">Love Story</span>
+                                <span class="track-artist-modern">Taylor Swift</span>
+                            </div>
+                        </li>
+                        <li class="spotify-item-modern" id="spotify-track-3" onclick="playSong(3)">
+                            <span class="track-num-modern">
+                                <div class="playing-indicator" id="playing-ind-3" style="display: none;">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="num-text">4</span>
+                            </span>
+                            <div class="track-info-modern">
+                                <span class="track-name-modern">My Love Mine All Mine</span>
+                                <span class="track-artist-modern">Mitski</span>
+                            </div>
+                        </li>
+                        <li class="spotify-item-modern" id="spotify-track-4" onclick="playSong(4)">
+                            <span class="track-num-modern">
+                                <div class="playing-indicator" id="playing-ind-4" style="display: none;">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="num-text">5</span>
+                            </span>
+                            <div class="track-info-modern">
+                                <span class="track-name-modern">Mine</span>
+                                <span class="track-artist-modern">Taylor Swift</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(12)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(14)">next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 14: Final Letter -->
+        <section class="screen hidden" id="screen-14" data-screen="14">
+            <div class="confetti-container" id="confetti-container"></div>
+            <div class="screen-content">
+                <h1 class="heading final-heading">Happy birthday, my darling 
+                    🤍</h1>
+                <div class="letter-container">
+                    <p id="letter-text" class="letter-text"></p>
+                </div>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(13)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(15)">finish 🎉</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 15: End -->
+        <section class="screen hidden" id="screen-15" data-screen="15">
+            <div class="screen-content">
+                <img src="https://media.tenor.com/zYT2EMT0vYoAAAAd/bugcat-capoo.gif" alt="Capoo" class="capoo-gif">
+                <h1 class="heading">Thank you for being in my life 🎂</h1>
+                <div class="btn-container">
+                    <button class="action-btn" onclick="restart()">mau ulang lagi sayang? <span class="heart">♥</span></button>
+                    <button class="back-btn single-back" onclick="goToScreen(14)">← back</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Progress Dots -->
+    <div class="progress-dots" id="progress-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
