@@ -24,7 +24,7 @@
         </div>
     </div>
     
-    <!-- Lightbox Modal -->
+    <!-- Lightbox Modal (Memory Photos) -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
         <img class="lightbox-img" id="lightbox-img" src="" alt="">
@@ -32,6 +32,20 @@
         <div class="lightbox-nav">
             <span class="lightbox-prev" onclick="prevLightbox()">❮</span>
             <span class="lightbox-next" onclick="nextLightbox()">❯</span>
+        </div>
+    </div>
+    
+    <!-- Lightbox Modal (Flower Photos) -->
+    <div class="lightbox-flower" id="lightbox-flower">
+        <span class="lightbox-close" onclick="closeLightboxFlower()">&times;</span>
+        <img class="lightbox-img-flower" id="lightbox-img-flower" src="" alt="">
+        <div class="lightbox-info">
+            <p class="lightbox-title" id="lightbox-title-flower"></p>
+            <p class="lightbox-caption" id="lightbox-caption-flower"></p>
+        </div>
+        <div class="lightbox-nav">
+            <span class="lightbox-prev" onclick="prevLightboxFlower()">❮</span>
+            <span class="lightbox-next" onclick="nextLightboxFlower()">❯</span>
         </div>
     </div>
     
@@ -90,6 +104,11 @@
                 <div class="playlist-item" data-index="4" onclick="playSong(4)">
                     <span class="p-num">5</span>
                     <span class="p-title">Mine</span>
+                    <span class="p-artist">Taylor Swift</span>
+                </div>
+                <div class="playlist-item" data-index="5" onclick="playSong(5)">
+                    <span class="p-num">6</span>
+                    <span class="p-title">Begin Again</span>
                     <span class="p-artist">Taylor Swift</span>
                 </div>
             </div>
@@ -411,6 +430,18 @@
                                 <span class="track-artist-modern">Taylor Swift</span>
                             </div>
                         </li>
+                        <li class="spotify-item-modern" id="spotify-track-5" onclick="playSong(5)">
+                            <span class="track-num-modern">
+                                <div class="playing-indicator" id="playing-ind-5" style="display: none;">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="num-text">6</span>
+                            </span>
+                            <div class="track-info-modern">
+                                <span class="track-name-modern">Begin Again</span>
+                                <span class="track-artist-modern">Taylor Swift</span>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <div class="btn-group">
@@ -431,27 +462,92 @@
                 </div>
                 <div class="btn-group">
                     <button class="back-btn" onclick="goToScreen(13)">← back</button>
-                    <button class="action-btn" onclick="goToScreen(15)">finish 🎉</button>
+                    <button class="action-btn" onclick="goToScreen(15)">next →</button>
                 </div>
             </div>
         </section>
 
-        <!-- Screen 15: End -->
+        <!-- Screen 15: Flowers -->
         <section class="screen hidden" id="screen-15" data-screen="15">
+            <div class="screen-content">
+                <h1 class="heading">For You With Love 💐</h1>
+                <div class="flowers-grid">
+                    <div class="polaroid flower-polaroid" onclick="openLightboxFlowers(0)">
+                        <img src="img/flower1.jpg" alt="White Rose" class="polaroid-img">
+                        <p class="flower-name">White Rose</p>
+                        <p class="polaroid-caption">"Like this white rose, our love is pure and untainted. Untouched by time."</p>
+                    </div>
+                    <div class="polaroid flower-polaroid" onclick="openLightboxFlowers(1)">
+                        <img src="img/flower2.jpg" alt="Red Rose" class="polaroid-img">
+                        <p class="flower-name">Red Rose</p>
+                        <p class="polaroid-caption">"Red rose for my deepest passion. The most beautiful love I have ever known."</p>
+                    </div>
+                    <div class="polaroid flower-polaroid" onclick="openLightboxFlowers(2)">
+                        <img src="img/flower3.jpg" alt="Pink Rose" class="polaroid-img">
+                        <p class="flower-name">Pink Rose</p>
+                        <p class="polaroid-caption">"Pink rose for the gentle love. It grows stronger each day in my heart."</p>
+                    </div>
+                    <div class="polaroid flower-polaroid" onclick="openLightboxFlowers(3)">
+                        <img src="img/flower4.jpg" alt="Sunflower" class="polaroid-img">
+                        <p class="flower-name">Sunflower</p>
+                        <p class="polaroid-caption">"Like the sunflower always facing the sun, you are my light that guides me home."</p>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="back-btn" onclick="goToScreen(14)">← back</button>
+                    <button class="action-btn" onclick="goToScreen(16)">next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 16: End -->
+        <section class="screen hidden" id="screen-16" data-screen="16">
             <div class="screen-content">
                 <img src="https://media.tenor.com/zYT2EMT0vYoAAAAd/bugcat-capoo.gif" alt="Capoo" class="capoo-gif">
                 <h1 class="heading">Thank you for being in my life 🎂</h1>
                 <div class="btn-container">
                     <button class="action-btn" onclick="restart()">mau ulang lagi sayang? <span class="heart">♥</span></button>
-                    <button class="back-btn single-back" onclick="goToScreen(14)">← back</button>
+                    <button class="back-btn single-back" onclick="goToScreen(15)">← back</button>
                 </div>
             </div>
         </section>
     </div>
 
+    <!-- Floating Mini Player -->
+    <div class="floating-mini-player" id="floating-mini-player">
+        <div class="mini-player-panel" id="mini-player-panel">
+            <div class="mini-player-header">
+                <span class="mini-now-playing">Now Playing</span>
+                <span class="mini-close" onclick="toggleMiniPlayer()">✕</span>
+            </div>
+            <div class="mini-player-info">
+                <span class="mini-song-title" id="mini-song-title">Perfect</span>
+                <span class="mini-song-artist" id="mini-song-artist">Ed Sheeran</span>
+            </div>
+            <div class="mini-player-progress">
+                <div class="mini-progress-bar" id="mini-progress-bar">
+                    <div class="mini-progress-fill" id="mini-progress-fill"></div>
+                </div>
+                <div class="mini-time-display">
+                    <span id="mini-current-time">0:00</span>
+                    <span id="mini-duration">0:00</span>
+                </div>
+            </div>
+            <div class="mini-player-controls">
+                <button class="mini-control-btn" onclick="prevSongMini()">⏮</button>
+                <button class="mini-play-btn" id="mini-play-btn" onclick="togglePlayMini()">▶</button>
+                <button class="mini-control-btn" onclick="nextSongMini()">⏭</button>
+            </div>
+        </div>
+        <div class="mini-player-toggle" id="mini-player-toggle" onclick="toggleMiniPlayer()">
+            <span class="mini-icon">🎵</span>
+        </div>
+    </div>
+
     <!-- Progress Dots -->
     <div class="progress-dots" id="progress-dots">
         <span class="dot active"></span>
+        <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
